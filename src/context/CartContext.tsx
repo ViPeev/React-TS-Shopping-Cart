@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
+import { ShoppingCart } from "../components/ShoppingCart";
 
 type providerProps = {
   children: ReactNode;
@@ -14,6 +15,7 @@ type CartContext = {
   closeCart: () => void;
   cartQuantity: number;
   cartItems: item[];
+  isOpen: boolean;
   getItemQuantity: (id: number) => number;
   increaseCartQuantity: (id: number) => void;
   decreaseCartQuantity: (id: number) => void;
@@ -96,9 +98,11 @@ export function CartProvider({ children }: providerProps) {
         cartQuantity,
         openCart,
         closeCart,
+        isOpen,
       }}
     >
       {children}
+      <ShoppingCart />
     </CartContext.Provider>
   );
 }
