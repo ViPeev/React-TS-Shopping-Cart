@@ -8,7 +8,7 @@ type ItemProps = {
   imgUrl: string;
 };
 
-export function Item({ id, name, price, imgUrl }: ItemProps) {
+export function Item({ name, price, imgUrl }: ItemProps) {
   const quantity = 1;
 
   return (
