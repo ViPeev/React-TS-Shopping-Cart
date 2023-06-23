@@ -29,9 +29,9 @@ export function CartProvider({ children }: providerProps) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
-  function increaseCarQuantity(id: number) {
+  function increaseCartQuantity(id: number) {
     setCartItems((currItems) => {
-      if (currItems.find((item) => item.id === id) === null) {
+      if (!currItems.find((item) => item.id === id)) {
         return [...currItems, { id, quantity: 1 }];
       } else {
         return currItems.map((item) => {
@@ -45,7 +45,7 @@ export function CartProvider({ children }: providerProps) {
     });
   }
 
-  function decreaseCarQuantity(id: number) {
+  function decreaseCartQuantity(id: number) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id)?.quantity === 1) {
         return [...currItems.filter((item) => item.id !== id)];
@@ -67,5 +67,16 @@ export function CartProvider({ children }: providerProps) {
     });
   }
 
-  return <CartContext.Provider value={{}}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider
+      value={{
+        getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity,
+        removeFromCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }
