@@ -17,7 +17,7 @@ export function Item({ id, name, price, imgUrl }: ItemProps) {
     removeFromCart,
   } = useCart();
   const quantity = getItemQuantity(id);
-  console.log(quantity)
+  
   return (
     <Card className="h-100">
       <Card.Img

@@ -2,6 +2,7 @@ import { useCart } from "../context/CartContext";
 import { Stack, Button } from "react-bootstrap";
 import items from "../data/items.json";
 import { formatCurrency } from "../utils/formatCurrency";
+import { ItemProps } from "./Item";
 
 type CartItemProps = {
   id: number;
@@ -11,7 +12,7 @@ type CartItemProps = {
 export function CartItem({ id, quantity }: CartItemProps) {
   const { removeFromCart } = useCart();
 
-  const item = items.find((i) => i.id === id);
+  const item: ItemProps | undefined = items.find((i) => i.id === id);
 
   if (item === undefined) {
     return null;

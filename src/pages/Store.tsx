@@ -2,7 +2,7 @@ import { Item } from "../components/Item";
 import items from "../data/items.json";
 import { Col, Row } from "react-bootstrap";
 
-export function Store() {
+export function Store():JSX.Element {
   return (
     <>
       <h1>Store</h1>

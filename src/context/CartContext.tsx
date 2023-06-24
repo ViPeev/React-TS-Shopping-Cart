@@ -29,19 +29,26 @@ export function useCart() {
 }
 
 export function CartProvider({ children }: providerProps) {
-  const [cartItems, setCartItems] = useState<item[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [cartItems, setCartItems]: [
+    item[],
+    React.Dispatch<React.SetStateAction<item[]>>
+  ] = useState<item[]>([]);
 
-  const cartQuantity = cartItems.reduce(
+  const [isOpen, setIsOpen]: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ] = useState<boolean>(false);
+
+  const cartQuantity: number = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
   );
 
-  function getItemQuantity(id: number) {
+  function getItemQuantity(id: number): number {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
-  function increaseCartQuantity(id: number) {
+  function increaseCartQuantity(id: number): void {
     setCartItems((currItems) => {
       if (!currItems.find((item) => item.id === id)) {
         return [...currItems, { id, quantity: 1 }];
@@ -57,7 +64,7 @@ export function CartProvider({ children }: providerProps) {
     });
   }
 
-  function decreaseCartQuantity(id: number) {
+  function decreaseCartQuantity(id: number): void {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id)?.quantity === 1) {
         return [...currItems.filter((item) => item.id !== id)];
@@ -73,17 +80,17 @@ export function CartProvider({ children }: providerProps) {
     });
   }
 
-  function removeFromCart(id: number) {
+  function removeFromCart(id: number): void {
     setCartItems((currItems) => {
       return [...currItems.filter((item) => item.id !== id)];
     });
   }
 
-  function openCart() {
+  function openCart(): void {
     setIsOpen(true);
   }
 
-  function closeCart() {
+  function closeCart(): void {
     setIsOpen(false);
   }
 
